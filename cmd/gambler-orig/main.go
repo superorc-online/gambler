@@ -112,7 +112,7 @@ for (playtime != 0){
 					}
 					}
 				}
-					attempts -= 1
+					attempts --
 						if (attempts == 0){
 							fmt.Printf("\nWould you like to play again? (Yes/No) ")
 							for (attempting != 0) {
