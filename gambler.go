@@ -2,7 +2,13 @@ package gambler
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 // WinThreshold sets the number you have to match or beat to win
 const WinThreshold = 80
@@ -33,6 +39,11 @@ func (gs *GamblingSession) Losses() int {
 // Balance returns the remaining balance in the current session
 func (gs *GamblingSession) Balance() int {
 	return gs.balance
+}
+
+// Random generates and returns a random number with a specified range
+func (gs *GamblingSession) Random(min int, max int) int{
+	return rand.Intn((max-min)+1) + min
 }
 
 // BuyAttempts reduces the balance and adds attempts to the current session

@@ -2,15 +2,11 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
-
+	
 	"github.com/superorc-online/gambler"
 )
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
+
 
 func main() {
 	gs := &gambler.GamblingSession{}

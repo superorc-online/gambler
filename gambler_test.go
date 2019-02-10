@@ -188,6 +188,9 @@ func TestGamblingSession_MakeAnAttempt(t *testing.T) {
 		{ name: `simple loss`, fields: fields{attempts: 1, wins: 2, losses: 4}, args: args{roll: 5}, want: false , want1: 5, wantErr: false, wantWins: 2, wantLosses: 5, wantAttempts: 0},
 		{ name: `simple win`, fields: fields{attempts: 1, wins: 2, losses: 4}, args: args{roll: 85}, want: true , want1: 85, wantErr: false, wantWins: 3, wantLosses: 4, wantAttempts: 0},
 		{ name: `perfect win`, fields: fields{attempts: 1, wins: 2, losses: 4}, args: args{roll: 80}, want: true , want1: 80, wantErr: false, wantWins: 3, wantLosses: 4, wantAttempts: 0},
+		{ name: `zero roll`, fields: fields{attempts: 1, wins: 2, losses: 4}, args: args{roll: 0}, want: false , want1: 0, wantErr: true, wantWins: 2, wantLosses: 4, wantAttempts: 1},
+		{ name: `above expected range`, fields: fields{attempts: 1, wins: 2, losses: 4}, args: args{roll: 250}, want: false , want1: 250, wantErr: true, wantWins: 2, wantLosses: 4, wantAttempts: 1},
+		{ name: `below expected range`, fields: fields{attempts: 1, wins: 2, losses: 4}, args: args{roll: -5}, want: false , want1: -5, wantErr: true, wantWins: 2, wantLosses: 4, wantAttempts: 1},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
