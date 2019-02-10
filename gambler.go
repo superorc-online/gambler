@@ -12,6 +12,10 @@ func init() {
 
 // WinThreshold sets the number you have to match or beat to win
 const WinThreshold = 80
+// MinRoll sets the mininum number that can be rolled
+const MinRoll = 1
+//MaxRoll sets the maximum number that can be rolled
+const MaxRoll = 100
 
 // A GamblingSession is a record about a gambling session
 type GamblingSession struct { 
@@ -42,8 +46,11 @@ func (gs *GamblingSession) Balance() int {
 }
 
 // Random generates and returns a random number with a specified range
-func (gs *GamblingSession) Random(min int, max int) int{
-	return rand.Intn((max-min)+1) + min
+func (gs *GamblingSession) Random() (int, error){
+	if MinRoll != 1 && MaxRoll != 100 {
+		return 0, fmt.Errorf("Range %d to %d is outside of expected values", MinRoll, MaxRoll)
+	}
+	return rand.Intn((MaxRoll-MinRoll)+1) + MinRoll, nil
 }
 
 // BuyAttempts reduces the balance and adds attempts to the current session
